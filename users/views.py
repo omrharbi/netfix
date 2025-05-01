@@ -41,4 +41,4 @@ class CompanySignUpView(CreateView):
 
 
 def LoginUserView(request):
-    pass
+     return render(request, 'users/login.html')
