@@ -42,3 +42,9 @@ class CompanySignUpView(CreateView):
 
 def LoginUserView(request):
      return render(request, 'users/login.html')
+
+def LoginCompanyView(request):
+    return render(request, 'users/login_company.html')
+
+def LoginCustomerView(request):
+    return render(request, 'users/login_customer.html')
