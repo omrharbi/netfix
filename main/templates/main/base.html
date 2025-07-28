@@ -1,29 +1,30 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{% static 'css/chois.css' %}"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{% static 'css/navbar.css' %}"
-    />
 
-    <!-- <link rel="stylesheet" href="{% static 'css/navbar.css' %}"> -->
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{% block title %}Title{% endblock %}</title>
-  </head>
-  <body>
-    {% include 'main/navbar.html' %}
-    <!-- places the content of navbar.html here -->
-    <div class='content'>
-      {% block content %} replace me {% endblock %}
-    </div>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>{% block title %}Title{% endblock %}</title>
+
+  <!-- Global CSS for all pages -->
+  <link rel="stylesheet" href="{% static 'css/navbar.css' %}" />
+
+  <!-- Optional: default style (e.g., home) -->
+  <link rel="stylesheet" href="{% static 'css/chois.css' %}" />
+
+  <!-- Page-specific CSS -->
+  {% block extra_css %}{% endblock %}
+</head>
+
+<body class="{% block body_class %}{% endblock %}">
+  {% include 'main/navbar.html' %}
+
+  <div class="content">
+    {% block content %} replace me {% endblock %}
+  </div>
+</body>
+
 </html>

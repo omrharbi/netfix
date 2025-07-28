@@ -1,13 +1,20 @@
 {% extends 'main/base.html' %} 
+
 {% block title %}
   Company Registration
-{%endblock %}
+{% endblock %}
+
+{% block body_class %}register-company-page{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/register.css' %}">
+{% endblock %}
 
 {% block content %}
-    <form method="POST">
-        {% csrf_token %}
-        {{form}}
-        <span class="helptext">Choose Field Above</span>
-        <button type="submit" name="register">Register</button>
-    </form>
+  <form method="POST" class="company-form">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <span class="helptext">Choose Field Above</span>
+      <button type="submit" name="register">Register</button>
+  </form>
 {% endblock %}

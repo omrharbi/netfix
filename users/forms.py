@@ -18,8 +18,20 @@ def validate_email(value):
 
 
 class CustomerSignUpForm(UserCreationForm):
-    pass
-
+    birth_date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
+    class Meta:
+        model=User
+        fields=['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
+    def save(self,commit=True):
+        user=super().save(commit=False)
+        user.is_customer=True
+        if commit:
+            user.save()
+            Customer.objects.create(
+                user=user,
+                birth_date=self.cleaned_data['birth_date']
+            )
+        return user
 
 class CompanySignUpForm(UserCreationForm):
     pass
