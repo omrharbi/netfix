@@ -34,7 +34,19 @@ class CustomerSignUpForm(UserCreationForm):
         return user
 
 class CompanySignUpForm(UserCreationForm):
-    pass
+    class Meta:
+        model = User
+        fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
+
+    @transaction.atomic
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.is_company = True
+        if commit:
+            user.save()
+            Company.objects.create(user=user)
+        return user
+
 
 
 class UserLoginForm(forms.Form):

@@ -1,0 +1,14 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="container text-center mt-5">
+    <h2>Choose Login Type</h2>
+    <div class="mt-4">
+        <a href="{% url 'login_customer' %}" class="btn btn-primary btn-lg m-2">Customer Login</a>
+        <a href="{% url 'login_company' %}" class="btn btn-success btn-lg m-2">Company Login</a>
+    </div>
+</div>
+{% endblock %}

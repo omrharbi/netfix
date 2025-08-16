@@ -10,7 +10,7 @@
     <div class="container d-flex justify-content-center align-items-center min-vh-100">
         <div class="card col-md-6 col-lg-4">
             <h2 class="text-center mb-4">Login</h2>
-            <form method="POST" action="{% url 'login' %}">
+            <form method="POST" action="{% url 'login_user' %}">
                 {% csrf_token %}
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>

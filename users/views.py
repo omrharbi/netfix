@@ -41,10 +41,29 @@ class CompanySignUpView(CreateView):
 
 
 def LoginUserView(request):
-     return render(request, 'users/login.html')
-
-def LoginCompanyView(request):
-    return render(request, 'users/login_company.html')
+    #  return render(request, 'users/login.html')
+    return render(request, 'users/login_choice.html')
 
 def LoginCustomerView(request):
-    return render(request, 'users/login_customer.html')
+    form = UserLoginForm(request.POST or None)
+    if request.method == "POST" and form.is_valid():
+        email = form.cleaned_data["email"]
+        password = form.cleaned_data["password"]
+        user = authenticate(request, email=email, password=password)
+        if user is not None and user.is_customer:
+            login(request, user)
+            return redirect("/")
+    return render(request, "users/login_customer.html", {"form": form})
+
+
+def LoginCompanyView(request):
+    form = UserLoginForm(request.POST or None)
+    if request.method == "POST" and form.is_valid():
+        email = form.cleaned_data["email"]
+        password = form.cleaned_data["password"]
+        user = authenticate(request, email=email, password=password)
+        if user is not None and user.is_company:
+            login(request, user)
+            return redirect("/")
+    return render(request, "users/login_company.html", {"form": form})
+
